@@ -106,7 +106,7 @@ const server = http.createServer((q, r) => {
   }
   await p.goto(URL);
   ok(JSON.stringify(await p.$$eval('footer .flinks a', a => a.map(x => x.getAttribute('href').replace(/^http.*/, 'github')))) === '["privacy.html","terms.html"]', 'footer links: privacy, terms');
-  ok(await p.evaluate(() => /Created by JL/.test(document.querySelector('footer').innerText) && /© 2026 JL/.test(document.querySelector('footer').innerText) && /Last updated/.test(document.querySelector('footer').innerText)), 'footer: credit, copyright, last updated');
+  ok(await p.evaluate(() => !/Created by|LinkedIn/i.test(document.querySelector('footer').innerText) && !document.querySelector('a[href*="linkedin"]') && /© 2026 JL/.test(document.querySelector('footer').innerText) && /Last updated/.test(document.querySelector('footer').innerText)), 'footer: no credit or LinkedIn; copyright, last updated');
   await b.close(); server.close();
   console.log(fails ? `\n${fails} failed` : '\nall checks passed'); process.exit(fails ? 1 : 0);
 })();
