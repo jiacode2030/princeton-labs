@@ -24,7 +24,7 @@ const server = http.createServer((q, r) => {
 
   const SEED = { 'phy-done': JSON.stringify(Object.fromEntries(['deriv','integ','products','diffeq','graphs','constant','variable','vectors','projectile','relative','forces','friction'].map(k => [k, 1]))),
                  'mvc-visited': JSON.stringify(['quadric', 'vectors', 'cross', 'quadric', 'lines']),
-                 'kin-done': JSON.stringify({ graphs: 1 }) };
+                 'other-done': JSON.stringify({ graphs: 1 }) };  /* another site's key on the same origin: must be ignored */
 
   for (const scheme of ['light', 'dark']) for (const w of [360, 768, 1280]) {
     const ctx = await b.newContext({ viewport: { width: w, height: 900 }, colorScheme: scheme });
@@ -40,7 +40,7 @@ const server = http.createServer((q, r) => {
     ok(!/NaN|undefined|Infinity|\[object/.test(await p.evaluate(() => document.body.innerText)), tag, 'no NaN/undefined text');
     ok(await p.evaluate(() => document.compatMode === 'CSS1Compat'), tag, 'standards mode');
     const ring = await p.evaluate(() => { const a = document.querySelector('a.card[data-id="phy103"] .prog'); return a && a.textContent.trim(); });
-    ok(ring === '12 of 32 modules done', tag, 'PHY 103 ring (phy- keys, not the AP kin- keys):', ring);
+    ok(ring === '12 of 32 modules done', tag, 'PHY 103 ring (phy- keys only):', ring);
     ok(await p.evaluate(() => !!document.querySelector('a.card[data-id="phy103"] .ring .val')), tag, 'ring drawn');
     ok(await p.evaluate(() => document.querySelectorAll('.card.soon .prog').length === 0), tag, 'no ring on coming-soon cards');
     ok((await p.evaluate(() => { const a = document.querySelector('a.card[data-id="mat201"] .prog'); return a && a.textContent.trim(); })) === '4 of 41 lessons visited', tag, 'MAT 201 ring (list of ids, duplicates counted once)');

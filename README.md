@@ -2,7 +2,7 @@
 
 Interactive study sites that follow Princeton courses, week by week. This repo is the landing page at https://jiacode2030.github.io/princeton-labs/, which links to each course site:
 
-- [PHY 103 Lab](https://jiacode2030.github.io/phy103-lab/), built from the same source as AP Labs' Mechanics Lab (see [physics-mechanics](https://github.com/jiacode2030/physics-mechanics))
+- [PHY 103 Lab](https://jiacode2030.github.io/phy103-lab/) (source: [phy103-lab](https://github.com/jiacode2030/phy103-lab))
 - [Multivariable Calculus Lab](https://jiacode2030.github.io/multivariable-calculus/) (MAT 201)
 
 > Unofficial study aids. Not affiliated with Princeton University. Use them to study, not on graded work, and follow each course's collaboration rules.
