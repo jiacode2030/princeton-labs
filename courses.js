@@ -10,7 +10,6 @@
    topics        3 to 5 short chips
    url           where the site lives
    status        'live' or 'soon'  (soon = muted, not clickable)
-   accent        one hex color; the page darkens it automatically in light mode
    prefix        the site's localStorage prefix
    progressKey   where the site stores progress: a JSON object {id: 1} or a JSON list of ids
    progressWord  what the progress means: 'done' (default) or 'visited'
@@ -27,7 +26,6 @@ window.COURSES = [
     topics: ['Kinematics', "Newton's laws", 'Energy and momentum', 'Rotation', 'Oscillations and waves'],
     url: 'https://jiacode2030.github.io/phy103-lab/',
     status: 'live',
-    accent: '#4FD1C5',
     prefix: 'phy-',
     progressKey: 'phy-done',
     progressWord: 'done'
@@ -43,7 +41,6 @@ window.COURSES = [
     topics: ['Vectors and space', 'Partial derivatives', 'Multiple integrals', 'Vector calculus'],
     url: 'https://jiacode2030.github.io/multivariable-calculus/',
     status: 'live',
-    accent: '#8B9CFF',
     prefix: 'mvc-',
     progressKey: 'mvc-visited',
     progressWord: 'visited'

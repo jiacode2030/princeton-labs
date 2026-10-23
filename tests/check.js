@@ -1,4 +1,4 @@
-/* Checks the landing page in Chromium at 360, 768 and 1280 px, in light and dark.
+/* Checks the landing page in Chromium at 360, 768 and 1280 px, with the device set to light and to dark (the page is light only).
    Run: node tests/check.js   (needs Node.js and Playwright; serves the folder on a local port) */
 const path = require('path'), fs = require('fs'), http = require('http');
 const { chromium } = require(require('child_process').execSync('npm root -g').toString().trim() + '/playwright');
@@ -73,7 +73,7 @@ const server = http.createServer((q, r) => {
   /* behaviour: filters, search, theme toggle, read-only storage, no data */
   const ctx = await b.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage();
   await p.goto(URL); await p.evaluate(s => { for (const k in s) localStorage.setItem(k, s[k]); }, SEED); await p.reload();
-  const snap = () => p.evaluate(() => JSON.stringify(Object.keys(localStorage).filter(k => k !== 'plabs-theme').sort().map(k => [k, localStorage.getItem(k)])));
+  const snap = () => p.evaluate(() => JSON.stringify(Object.keys(localStorage).filter(() => true).sort().map(k => [k, localStorage.getItem(k)])));
   const before = await snap();
   ok(JSON.stringify(await p.$$eval('.chip', c => c.map(x => x.textContent))) === '["All","Physics","Math"]', 'only subjects that have a course');
   await p.click('.chip:text("Math")'); ok(await p.$$eval('.card', c => c.length) === 1, 'Math filter');
@@ -81,7 +81,7 @@ const server = http.createServer((q, r) => {
   await p.fill('#q', 'zzzz'); ok(await p.isVisible('#empty'), 'empty state');
   await p.fill('#q', '');
   await p.keyboard.press('Tab'); await p.keyboard.press('Tab');
-  await p.click('#theme'); ok(await p.evaluate(() => localStorage.getItem('plabs-theme') === 'light' && document.documentElement.dataset.theme === 'light'), 'theme saved in plabs-theme');
+  ok(await p.evaluate(() => !document.querySelector('#theme,canvas') && getComputedStyle(document.documentElement).colorScheme === 'light' && !localStorage.getItem('plabs-theme')), 'light only: no theme switch, no animated background');
   const after = await snap(); if (after !== before) console.log('  before', before, '\n  after ', after);
   ok(after === before, 'course keys never written');
   ok(await p.evaluate(() => [...document.querySelectorAll('a.card')].every(a => a.href.startsWith('https://jiacode2030.github.io/'))), 'cards are real links');
@@ -102,11 +102,12 @@ const server = http.createServer((q, r) => {
     ok(!(await q.evaluate(() => document.documentElement.scrollWidth > innerWidth)), f, w, 'no horizontal scroll');
     ok(await q.evaluate(() => /Last updated/.test(document.body.innerText) && !!document.querySelector('.brand svg') && !!document.querySelector('a[href="./"]')), f, w, 'logo, last updated, link home');
     ok(!e2.length, f, w, 'no page errors', e2.join(' | '));
+    ok(await q.evaluate(() => getComputedStyle(document.body).backgroundColor === 'rgb(244, 246, 248)'), f, w, 'light only, even on a dark device');
     await q.close();
   }
   await p.goto(URL);
   ok(JSON.stringify(await p.$$eval('footer .flinks a', a => a.map(x => x.getAttribute('href').replace(/^http.*/, 'github')))) === '["privacy.html","terms.html"]', 'footer links: privacy, terms');
-  ok(await p.evaluate(() => !/Created by|LinkedIn/i.test(document.querySelector('footer').innerText) && !document.querySelector('a[href*="linkedin"]') && /© 2026 JL/.test(document.querySelector('footer').innerText) && /Last updated/.test(document.querySelector('footer').innerText)), 'footer: no credit or LinkedIn; copyright, last updated');
+  ok(await p.evaluate(() => /JL · Princeton Class of 2030/.test(document.querySelector('footer').innerText) && !/Created by|LinkedIn/i.test(document.querySelector('footer').innerText) && !document.querySelector('a[href*="linkedin"]') && /© 2026 JL/.test(document.querySelector('footer').innerText) && /Last updated/.test(document.querySelector('footer').innerText)), 'footer: plain credit, no LinkedIn; copyright, last updated');
   await b.close(); server.close();
   console.log(fails ? `\n${fails} failed` : '\nall checks passed'); process.exit(fails ? 1 : 0);
 })();
