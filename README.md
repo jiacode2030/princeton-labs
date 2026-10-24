@@ -34,4 +34,4 @@ node tests/check.js
 
 The script opens the page at 360, 768 and 1280 px in light and dark. It checks for overflow, bad text, console errors, touch targets, contrast and heading order, and checks both progress rings with fake data. It also confirms there's no analytics or report link, and that the privacy and terms pages load cleanly.
 
-© 2026 JL. All rights reserved.
+© 2026 Jiarui Li. All rights reserved.
