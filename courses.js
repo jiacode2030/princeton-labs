@@ -54,7 +54,7 @@ window.COURSES = [
     modules: 22,
     unitWord: 'modules',
     topics: ['Java basics', 'Recursion', 'Objects', 'Algorithms', 'TOY and circuits'],
-    url: 'https://jiacode2030.github.io/princeton-labs/cos126/',
+    url: 'https://jiacode2030.github.io/cos126-lab/',
     status: 'live',
     prefix: 'cos-',
     progressKey: 'cos-done',
