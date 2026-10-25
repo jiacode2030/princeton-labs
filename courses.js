@@ -3,7 +3,7 @@
    id            short, unique
    title         card heading
    course        the course it follows (small line under the title)
-   subject       Physics | Chemistry | Biology | Math  (sets the icon and the filter chip)
+   subject       Physics | Chemistry | Biology | Math | Computer Science  (sets the icon and the filter chip)
    description   one line
    modules       how many modules or lessons the site has (the "Y" in "X of Y"); null if unknown
    unitWord      what to call them: 'modules' (default) or 'lessons'
@@ -44,5 +44,20 @@ window.COURSES = [
     prefix: 'mvc-',
     progressKey: 'mvc-visited',
     progressWord: 'visited'
+  },
+  {
+    id: 'cos126',
+    title: 'COS 126 Lab',
+    course: 'COS 126: computer science, an interdisciplinary approach',
+    subject: 'Computer Science',
+    description: 'Every lecture as a module: step through Java line by line, run a TOY machine, train a perceptron, and check yourself.',
+    modules: 22,
+    unitWord: 'modules',
+    topics: ['Java basics', 'Recursion', 'Objects', 'Algorithms', 'TOY and circuits'],
+    url: 'https://jiacode2030.github.io/princeton-labs/cos126/',
+    status: 'live',
+    prefix: 'cos-',
+    progressKey: 'cos-done',
+    progressWord: 'done'
   }
 ];

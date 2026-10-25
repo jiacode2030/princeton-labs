@@ -150,7 +150,7 @@ footer .flinks{flex-basis:100%;display:flex;flex-wrap:wrap;gap:0 24px;border-top
     <div class="fcol">
       <p class="credit">Built by Jiarui Li · Princeton Class of 2030 · a student project</p>
       <p>© 2026 Jiarui Li. All rights reserved.</p>
-      <p>Last updated October 23, 2026</p>
+      <p>Last updated October 25, 2026</p>
     </div>
     <div class="fcol">
       <p>Unofficial study aids. Not affiliated with Princeton University.</p>
@@ -191,6 +191,7 @@ const ICONS={
   Chemistry:P+'<path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/><circle cx="10" cy="18" r=".6" fill="currentColor"/><circle cx="14" cy="17.5" r=".6" fill="currentColor"/></svg>',
   Biology:P+'<path d="M7 3c0 6 10 6 10 12s-10 3-10 6M17 3c0 6-10 6-10 12s10 3 10 6"/><path d="M8.5 6h7M8.5 18h7M10 9.5h4M10 14.5h4"/></svg>',
   Math:P+'<path d="M4 20c2.5 0 3-16 6-16s2.5 12 5 12 2-6 5-6"/><path d="M3 20h18"/></svg>',
+  'Computer Science':P+'<path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>',
   Science:P+'<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>'
 };
 const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
@@ -220,7 +221,7 @@ function card(c){
 }
 
 /* Filters: only subjects that have at least one course. */
-const ORDER=['Physics','Chemistry','Biology','Math'];
+const ORDER=['Physics','Chemistry','Biology','Math','Computer Science'];
 const subjects=[...new Set(COURSES.map(c=>c.subject))].sort((a,b)=>(ORDER.indexOf(a)+1||99)-(ORDER.indexOf(b)+1||99));
 let subject='All',query='';
 const fs=$('#filters');

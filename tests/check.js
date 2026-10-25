@@ -63,7 +63,7 @@ const server = http.createServer((q, r) => {
       ok(!low.length, tag, 'text contrast >= 4.5:1', low.join(' '));
       const dup = await p.evaluate(() => { const s = {}; return [...document.querySelectorAll('[id]')].map(e => e.id.toLowerCase()).filter(i => s[i] ? 1 : (s[i] = 1, 0)); });
       ok(!dup.length, tag, 'no ids that differ only by case', dup.join(','));
-      ok(JSON.stringify(await p.evaluate(() => [...document.querySelectorAll('h1,h2,h3')].map(h => h.tagName))) === JSON.stringify(['H1', 'H2', 'H3', 'H3']), tag, 'heading order');
+      ok(JSON.stringify(await p.evaluate(() => [...document.querySelectorAll('h1,h2,h3')].map(h => h.tagName))) === JSON.stringify(['H1', 'H2', 'H3', 'H3', 'H3']), tag, 'heading order');
     }
     ok(!errs.length, tag, 'no console errors', errs.join(' | '));
     await p.screenshot({ path: path.join(OUT, `${scheme}-${w}.png`), fullPage: true });
@@ -75,7 +75,7 @@ const server = http.createServer((q, r) => {
   await p.goto(URL); await p.evaluate(s => { for (const k in s) localStorage.setItem(k, s[k]); }, SEED); await p.reload();
   const snap = () => p.evaluate(() => JSON.stringify(Object.keys(localStorage).filter(() => true).sort().map(k => [k, localStorage.getItem(k)])));
   const before = await snap();
-  ok(JSON.stringify(await p.$$eval('.chip', c => c.map(x => x.textContent))) === '["All","Physics","Math"]', 'only subjects that have a course');
+  ok(JSON.stringify(await p.$$eval('.chip', c => c.map(x => x.textContent))) === '["All","Physics","Math","Computer Science"]', 'only subjects that have a course');
   await p.click('.chip:text("Math")'); ok(await p.$$eval('.card', c => c.length) === 1, 'Math filter');
   await p.click('.chip:text("All")'); await p.fill('#q', 'partial'); ok(await p.$$eval('.card h3', c => c.map(x => x.textContent).join()) === 'Multivariable Calculus Lab', 'search by topic');
   await p.fill('#q', 'zzzz'); ok(await p.isVisible('#empty'), 'empty state');

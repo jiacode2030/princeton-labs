@@ -4,6 +4,7 @@ Interactive study sites that follow Princeton courses, week by week. This repo i
 
 - [PHY 103 Lab](https://jiacode2030.github.io/phy103-lab/) (source: [phy103-lab](https://github.com/jiacode2030/phy103-lab))
 - [Multivariable Calculus Lab](https://jiacode2030.github.io/multivariable-calculus/) (MAT 201)
+- [COS 126 Lab](https://jiacode2030.github.io/princeton-labs/cos126/) (source: [`cos126/`](cos126/) in this repo)
 
 > Unofficial study aids. Not affiliated with Princeton University. Use them to study, not on graded work, and follow each course's collaboration rules.
 
@@ -12,9 +13,10 @@ It's plain static files with no build step:
 - `index.html` is the whole page.
 - `courses.js` is the course list.
 - `privacy.html` and `terms.html` hold the privacy policy and terms of use for every Princeton Labs site, styled by `legal.css`. Each course site links to them at `/princeton-labs/privacy.html` and `/princeton-labs/terms.html`.
-- `tests/check.js` holds the Playwright checks.
+- `cos126/` is COS 126 Lab: `index.html` (page and demos) and `content.js` (the modules). Progress is stored under `cos-done`.
+- `tests/check.js` holds the Playwright checks for the landing page, and `tests/cos126.js` for COS 126 Lab.
 
-There are no analytics on any Princeton Labs site, and no shared feedback repo. Each course site's Report link opens an issue in that site's own repo.
+There are no analytics on any Princeton Labs site, and no shared feedback repo. Each course site's Report link opens an issue in that site's own repo (COS 126 Lab lives here, so its reports come to this repo).
 
 ## Add a course
 
@@ -30,6 +32,7 @@ Push to `main`. GitHub Pages serves this repo from the root (Settings → Pages 
 
 ```
 node tests/check.js
+node tests/cos126.js
 ```
 
 The script opens the page at 360, 768 and 1280 px in light and dark. It checks for overflow, bad text, console errors, touch targets, contrast and heading order, and checks both progress rings with fake data. It also confirms there's no analytics or report link, and that the privacy and terms pages load cleanly.
